@@ -20,9 +20,18 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./paths": "./paths.js",
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "typesVersions": {
     "<3.8": {
       "*": [
@@ -38,7 +47,7 @@
   ],
   "scripts": {
     "check": "tsc --noEmit",
-    "prepare": "node ../../../scripts/prepare.js"
+    "prepare": "../../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
     "@storybook/addons": "7.0.0-alpha.18",
@@ -65,6 +74,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts"
+    ]
   },
   "gitHead": "bd59f1eef0f644175abdb0d9873ed0553f431f53"
 }
